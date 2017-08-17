@@ -1,0 +1,17 @@
+{
+  "name": "jeepman",
+  "version": "1.0.0",
+  "description": "JeepMan Alexa Skill",
+  "main": "index.js",
+  "dependencies": {
+    "alexa-sdk": "^1.0.12",
+    "https": "^1.0.0",
+    "moment": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
