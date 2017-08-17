@@ -10,8 +10,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Scott Rehlander",
+  "license": "MIT",
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/scottrehlander/jeep-man-alexa.git"
+	}
 }
