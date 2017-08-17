@@ -16,6 +16,26 @@ var precipChanceEnum = {
 
 var handlers = {
 
+	'AMAZON.HelpIntent': function() {
+		this.emit(':ask', 'Welcome to JeepMan, developed by Scott Rehlander. Ask me if you should take your top down.');
+	},
+
+	'AMAZON.StopIntent': function() {
+		this.emit(':tell', 'Ok');
+	},
+
+	'AMAZON.CancelIntent': function() {
+		this.emit(':tell', 'Ok');
+	},
+
+	'LaunchRequest': function() {
+		this.emit(':ask', 'Welcome to Jeep Man, developed by Scott Rehlander. Ask me if you can take your top down.');
+	},
+
+	'Unhandled': function() {
+		this.emit(':tell', 'You may only ask Jeep Man if you should take your top down.');
+	},
+
 	// Skill to check if the user should take the top off today
     'TopOffToday': function () {
         var self = this;
