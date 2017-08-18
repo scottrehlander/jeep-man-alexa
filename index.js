@@ -137,15 +137,15 @@ var handlers = {
 								switch(tonightPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It won't rain today or tonight
-										self.emit(':tell', `Yes, there should be no precipitation today or tonight.`);
+										self.emit(':tell', `All looks clear, there should be no precipitation today or tonight.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It won't rain today, but might tonight
-										self.emit(':tell', `Yes, there should be no precipitation today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `There should be no precipitation today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It won't rain today, but probably will tonight
-										self.emit(':tell', `Yes, you should be okay today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `You should be okay today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
 										break;		
 								}
 								break;
@@ -153,15 +153,15 @@ var handlers = {
 								switch(tonightPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It might today but not tonight
-										self.emit(':tell', `Maybe, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today, but tonight should be clear.`);
+										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today, but tonight should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It might rain today and might rain tonight
-										self.emit(':tell', `Maybe, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It might rain today and will likely rain tonight
-										self.emit(':tell', `Maybe, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you should put your top on tonight because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you should put your top on tonight because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
 										break;		
 								}
 								break;
@@ -169,15 +169,15 @@ var handlers = {
 								switch(tonightPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It will probably rain today but won't tonight
-										self.emit(':tell', `No, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you could put your top down tonight, it should be clear.`);
+										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you could put your top down tonight, it should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It will probably rain today and it might rain tonight
-										self.emit(':tell', `No, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you might be able to put your top down tonight, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you might be able to put your top down tonight, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It will probably rain today and tonight
-										self.emit(':tell', `No, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
 										break;		
 								}
 								break;
@@ -185,52 +185,52 @@ var handlers = {
 					}
 					// Today is over
 					else {
-						switch (tonight.chance) {
+						switch (tonightPrecip.chance) {
 							case precipChanceEnum.NONE:
-								switch(tomorrowDay.chance) {
+								switch(tomorrowDayPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It won't rain tonight or tomorrow during the day
-										self.emit(':tell', `Yes, there should be no precipitation tonight or tomorrow morning.`);
+										self.emit(':tell', `All looks good, there should be no precipitation tonight or tomorrow morning.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It won't rain tonight, but might tomorrow during the day
-										self.emit(':tell', `Yes, there should be no precipitation tonight, but be careful because there is a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `Tonight looks good. There should be no precipitation tonight, but be careful because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It won't rain tonight, but probably will tomorrow during the day
-										self.emit(':tell', `Yes, you should be okay tonight, but make sure to put your top on before tomorrow because there is a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
+										self.emit(':tell', `You should be okay tonight, but make sure to put your top on before tomorrow because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
 										break;		
 								}
 								break;
 							case precipChanceEnum.UNLIKELY:
-								switch(tomorrowDay.chance) {
+								switch(tomorrowDayPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It might rain tonight but not tomorrow during the day
-										self.emit(':tell', `Maybe, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight, but tomorrow during the day should be clear.`);
+										self.emit(':tell', `Careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight, but tomorrow during the day should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It might rain tonight and might rain tomorrow during the day
-										self.emit(':tell', `Maybe, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `Be careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It might rain tonight and will likely rain tomorrow during the day
-										self.emit(':tell', `Maybe, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you should put your top on before tomorrow because there is a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
+										self.emit(':tell', `Be careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you should put your top on before tomorrow because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
 										break;		
 								}
 								break;
 							case precipChanceEnum.LIKELY:
-								switch(tomorrowDay.chance) {
+								switch(tomorrowDayPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It will probably rain tonight but won't tomorrow during the day
-										self.emit(':tell', `No, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you could put your top down tomorrow during the day, it should be clear.`);
+										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you could put your top down tomorrow during the day, it should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It will probably rain tonight and it might rain tomorrow during the day
-										self.emit(':tell', `No, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you might be able to put your top down tomorrow during the day. There is a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you might be able to put your top down tomorrow during the day. There is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It will probably rain tonight and tomorrow during the day
-										self.emit(':tell', `No, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDay.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;		
 								}
 								break;
@@ -285,9 +285,81 @@ var getChanceOfPrecip = function(dataPoints) {
 	};
 }
 
-var setUserZip = function(user, device) {
+var setUserZip = (user, device) => {
+	var self = this;
+
 	return new Promise((resolve, reject) => {
-		resolve('01772');
+
+		if(!user.permissions || !user.permissions.consentToken) {
+			console.log('Could not get consent token for user');
+
+			reject(new Error(`You must consent to providing your zip code for Jeep Man to work.`));
+			return;
+		}
+
+		let consentToken = user.permissions.consentToken;
+
+		console.log(`About to make https request to Amazon Api for user zip code: https://api.amazonalexa.com/v1/devices/${device.deviceId}/settings/address/countryAndPostalCode with consentToken ${consentToken}`);
+
+		// Grab the weather data from the Dark Sky API
+        https.get({
+				host: `api.amazonalexa.com`,
+				port: 443,
+				path: `/v1/devices/${device.deviceId}/settings/address/countryAndPostalCode`,
+				headers: {
+					Authorization: `Bearer ${consentToken}`
+				}
+		}, (res) => {
+			console.log('Https request made to Alexa API');
+
+            const { statusCode } = res;
+            const contentType = res.headers['content-type'];
+            
+            let error;
+            if (statusCode !== 200) {
+                error = new Error('Request Failed.\n' + `Status Code: ${statusCode}`);
+            } 
+            else if (!/^application\/json/.test(contentType)) {
+                error = new Error('Invalid content-type.\n' + `Expected application/json but received ${contentType}`);
+            }
+            
+            if (error) {
+                console.error(`Error encountered when calling https get: ${error.message}`);
+				
+				// Consume response data to free up memory
+                res.resume();
+				
+				reject(new Error(`Sorry, I was unable to fetch the weather data.`));
+                return;
+			}
+			
+			console.log('Setting encoding for https request');
+            
+            res.setEncoding('utf8');
+            let rawData = '';
+            res.on('data', (chunk) => { rawData += chunk; });
+            res.on('end', () => {
+                try {
+					console.log('Https request completed for zip code API');
+					
+					const parsedData = JSON.parse(rawData);
+					console.log(`Got data from the Alexa address API: ${JSON.stringify(parsedData)}`);
+
+					resolve(parsedData.postalCode);
+					return;
+                } catch (e) {
+					console.error(`Error while completing response: ${e.message}`);
+					
+					reject(new Error(`Sorry, I was unable to complete the request to fetch your zip code.`));
+					return;
+                }
+            });
+        }).on('error', (e) => {
+			console.error(`Error while calling https: ${e.message}`);
+
+			reject(new Error(`Sorry, I could not make a secure request to the Alexa zip code service.`));
+			return;
+        });
 	});
 }
 
@@ -311,7 +383,7 @@ exports.handler = function (event, context, callback) {
 		// There was an issue getting the zip code
 		console.error('Could not get user zip: ' + JSON.stringify(err.message));
 
-		this.emit(':tell', 'Sorry, we could not get the zip code associated with your device.');
+		alexa.emit(':tell', 'Sorry, we could not get the zip code associated with your device. Please make sure you have provided consent for location data');
 		return;
 	});
 };
