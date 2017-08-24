@@ -97,12 +97,16 @@ var handlers = {
 						var localTime = moment.utc(hourlyDataPoint.time, 'X').utcOffset(parsedData.offset);
 						var localDay = localTime.get('day');
 
+						console.log(`Time of data point is: ${localTime.toString()}`);
+
 						if (localDay == localDayNow) {
 							if(localTime.get('hour') < 19) {
 								console.log(`This data point is for today`);
 
 								today.push(hourlyDataPoint);
 							} else {
+								console.log(`This data point is for tonight`);
+
 								tonight.push(hourlyDataPoint);
 							}
 						} 
@@ -141,11 +145,11 @@ var handlers = {
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It won't rain today, but might tonight
-										self.emit(':tell', `There should be no precipitation today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `There should be no precipitation today, but be careful because there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It won't rain today, but probably will tonight
-										self.emit(':tell', `You should be okay today, but be careful because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `You should be okay today, but be careful because there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight.`);
 										break;		
 								}
 								break;
@@ -153,15 +157,15 @@ var handlers = {
 								switch(tonightPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It might today but not tonight
-										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today, but tonight should be clear.`);
+										self.emit(':tell', `Be careful, there is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today, but tonight should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It might rain today and might rain tonight
-										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `Be careful, there is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today and a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It might rain today and will likely rain tonight
-										self.emit(':tell', `Be careful, there is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you should put your top on tonight because there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `Be careful, there is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today. But you should put your top on tonight because there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation.`);
 										break;		
 								}
 								break;
@@ -169,15 +173,15 @@ var handlers = {
 								switch(tonightPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It will probably rain today but won't tonight
-										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you could put your top down tonight, it should be clear.`);
+										self.emit(':tell', `There is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today. But you could put your top down tonight, it should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It will probably rain today and it might rain tonight
-										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today. But you might be able to put your top down tonight, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `There is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today. But you might be able to put your top down tonight, there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It will probably rain today and tonight
-										self.emit(':tell', `There is a ${(todayPrecip.chanceProbability * 100).toString()} percent chance of precipitation today and a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight.`);
+										self.emit(':tell', `There is a ${Math.round((todayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation today and a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight.`);
 										break;		
 								}
 								break;
@@ -194,11 +198,11 @@ var handlers = {
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It won't rain tonight, but might tomorrow during the day
-										self.emit(':tell', `Tonight looks good. There should be no precipitation tonight, but be careful because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `Tonight looks good. There should be no precipitation tonight, but be careful because there is a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It won't rain tonight, but probably will tomorrow during the day
-										self.emit(':tell', `You should be okay tonight, but make sure to put your top on before tomorrow because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
+										self.emit(':tell', `You should be okay tonight, but make sure to put your top on before tomorrow because there is a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation during the day.`);
 										break;		
 								}
 								break;
@@ -206,15 +210,15 @@ var handlers = {
 								switch(tomorrowDayPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It might rain tonight but not tomorrow during the day
-										self.emit(':tell', `Careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight, but tomorrow during the day should be clear.`);
+										self.emit(':tell', `Careful, there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight, but tomorrow during the day should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It might rain tonight and might rain tomorrow during the day
-										self.emit(':tell', `Be careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `Be careful, there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight and a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It might rain tonight and will likely rain tomorrow during the day
-										self.emit(':tell', `Be careful, there is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you should put your top on before tomorrow because there is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation during the day.`);
+										self.emit(':tell', `Be careful, there is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight. But you should put your top on before tomorrow because there is a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation during the day.`);
 										break;		
 								}
 								break;
@@ -222,15 +226,15 @@ var handlers = {
 								switch(tomorrowDayPrecip.chance) {
 									case precipChanceEnum.NONE:
 										// It will probably rain tonight but won't tomorrow during the day
-										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you could put your top down tomorrow during the day, it should be clear.`);
+										self.emit(':tell', `There is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight. But you could put your top down tomorrow during the day, it should be clear.`);
 										break;
 									case precipChanceEnum.UNLIKELY:
 										// It will probably rain tonight and it might rain tomorrow during the day
-										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight. But you might be able to put your top down tomorrow during the day. There is a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation.`);
+										self.emit(':tell', `There is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight. But you might be able to put your top down tomorrow during the day. There is a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation.`);
 										break;
 									case precipChanceEnum.LIKELY:
 										// It will probably rain tonight and tomorrow during the day
-										self.emit(':tell', `There is a ${(tonightPrecip.chanceProbability * 100).toString()} percent chance of precipitation tonight and a ${(tomorrowDayPrecip.chanceProbability * 100).toString()} percent chance of precipitation tomorrow during the day.`);
+										self.emit(':tell', `There is a ${Math.round((tonightPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tonight and a ${Math.round((tomorrowDayPrecip.chanceProbability * 100)).toString()} percent chance of precipitation tomorrow during the day.`);
 										break;		
 								}
 								break;
@@ -303,12 +307,12 @@ var setUserZip = (user, device) => {
 
 		// Grab the weather data from the Dark Sky API
         https.get({
-				host: `api.amazonalexa.com`,
-				port: 443,
-				path: `/v1/devices/${device.deviceId}/settings/address/countryAndPostalCode`,
-				headers: {
-					Authorization: `Bearer ${consentToken}`
-				}
+			host: `api.amazonalexa.com`,
+			port: 443,
+			path: `/v1/devices/${device.deviceId}/settings/address/countryAndPostalCode`,
+			headers: {
+				Authorization: `Bearer ${consentToken}`
+			}
 		}, (res) => {
 			console.log('Https request made to Alexa API');
 
